@@ -31,25 +31,35 @@ function quicksortPartition(nList) {
 	// Iterating through elements
 	for(int i = 0; i < pivot; i++){
 		if(nList[i] < pivot) {
-			swap(i, leftList, rightList)
+			swap(nList[i], leftList, rightList)
 		}
 	}
-	quicksortPartition(partList1);
-	quicksortPartition(partList2);
+	quicksortPartition(leftList);
+	quicksortPartition(rightList);
 }
 
-function swap(index, leftList, rightList){
+function quicksortMerge(nList) {
+}
+
+/**
+ * Swap when the item is less than the pivot value. Equivalent to swapping in
+ * quicksort is to add to the left array, and remove the element from the right
+ * array.
+ */
+function swap(element, leftList, rightList){
 	/*
 	 * Add the element that is less than pivot to the left array. Replace the
 	 * element at the old index with the first element of the right array
 	 */
-	leftList[leftList.length] = rightList[index];
-	temp = rightList[0];
-	for(int i = 0; i < index - 1; i++){
-		rightList[i] = rightList[i+1];
-	}
-	rightList[index] = temp;
-	// Too complicated??? ArrayLists in Javascript???
+	leftList.push(element);
+	// Remove the element from the array
+	var index = rightList.indexOf(element);
+	/*
+	 * Splice: A way to remove a particular element from the array. The "1"
+	 * removes 1 element from the array.
+	 */
+	rightList.splice(index, 1);
+	
 }
 
 quicksortPartition([10, 2, 5, 4, 3, 8, 7, 1, 9, 6]);
