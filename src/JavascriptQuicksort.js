@@ -7,8 +7,12 @@
  * 
  */
 function quicksortPartition(leftList, rightList) {
+	console.log("leftList (init): " + leftList);
+	console.log("rightList (init): " + rightList);
+
 	// The case of the empty array
-	if(rightList.length == 0){
+	if (rightList.length == 0) {
+		console.log("Final: " + leftList);
 		return leftList;
 	}
 	/*
@@ -16,11 +20,12 @@ function quicksortPartition(leftList, rightList) {
 	 * of the left array, return the sorted array (the left one); it has been
 	 * sorted.
 	 */
-	if(rightList.length == 1){
+	if (rightList.length == 1) {
 		leftList.push(rightList[0]);
+		console.log("Final: " + leftList);
 		return leftList;
 	}
-	
+
 	/*
 	 * Choose a pivot value; in this case the last value is chosen but any value
 	 * can be chosen; but really any value can be chosen as long as it is
@@ -28,14 +33,13 @@ function quicksortPartition(leftList, rightList) {
 	 * can choose another value if the pivot is not 'central' enough.
 	 */
 	var pivot = rightList[rightList.length - 1];
-	
-	// For left of pivot
-	var leftList = [];
-	// For right of pivot
-	var rightList = [];
+
 	// Iterating through elements
-	for(i = 0; i < pivot; i++){
-		if(rightList[i] < pivot) {
+	for (i = 0; i < rightList.length; i++) {
+		console.log("rightList[i]: " + rightList[i] + " pivot " + pivot);
+		if (rightList[i] < pivot) {
+			console.log("Element: " + rightList[i] + " is < " + pivot
+					+ ". Swapping.");
 			swap(rightList[i], leftList, rightList);
 		}
 	}
@@ -49,7 +53,7 @@ function quicksortPartition(leftList, rightList) {
  * quicksort is to add to the left array, and remove the element from the right
  * array.
  */
-function swap(element, leftList, rightList){
+function swap(element, leftList, rightList) {
 	/*
 	 * Add the element that is less than pivot to the left array. Replace the
 	 * element at the old index with the first element of the right array
@@ -62,7 +66,8 @@ function swap(element, leftList, rightList){
 	 * removes 1 element from the array.
 	 */
 	rightList.splice(index, 1);
-	
+	console.log("leftList (after swap): " + leftList);
+	console.log("rightList (after swap): " + rightList);
 }
 
-console.log(quicksortPartition([], [10, 2, 5, 4, 3, 8, 7, 1, 9, 6]));
+quicksortPartition([], [ 10, 2, 5, 4, 3, 8, 7, 1, 9, 6 ]);
