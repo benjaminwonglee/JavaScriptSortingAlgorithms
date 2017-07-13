@@ -34,9 +34,9 @@ function quicksortPartition(leftList, rightList) {
 	// For right of pivot
 	var rightList = [];
 	// Iterating through elements
-	for(int i = 0; i < pivot; i++){
-		if(nList[i] < pivot) {
-			swap(nList[i], leftList, rightList);
+	for(i = 0; i < pivot; i++){
+		if(rightList[i] < pivot) {
+			swap(rightList[i], leftList, rightList);
 		}
 	}
 	// Swap the pivot with first item of the right list
