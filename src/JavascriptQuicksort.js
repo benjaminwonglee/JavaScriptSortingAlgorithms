@@ -6,24 +6,13 @@
  * @author BenWL
  * 
  */
-function quicksortPartition(leftList, rightList) {
-	console.log("leftList (init): " + leftList);
-	console.log("rightList (init): " + rightList);
+function quicksortPartition(index, list) {
+	console.log("list (init): " + list);
 
 	// The case of the empty array
-	if (rightList.length == 0) {
-		console.log("Final: " + leftList);
-		return leftList;
-	}
-	/*
-	 * If the right array is empty or has 1 element, add the element to the end
-	 * of the left array, return the sorted array (the left one); it has been
-	 * sorted.
-	 */
-	if (rightList.length == 1) {
-		leftList.push(rightList[0]);
-		console.log("Final: " + leftList);
-		return leftList;
+	if (list.length < 2) {
+		console.log("Final: " + list);
+		return list;
 	}
 
 	/*
@@ -32,20 +21,21 @@ function quicksortPartition(leftList, rightList) {
 	 * consistent. Better if the approx range of the values is known; since one
 	 * can choose another value if the pivot is not 'central' enough.
 	 */
-	var pivot = rightList[rightList.length - 1];
+	var pivot = list[list.length - 1];
 
-	// Iterating through elements
-	for (i = 0; i < rightList.length; i++) {
-		console.log("rightList[i]: " + rightList[i] + " pivot " + pivot);
-		if (rightList[i] < pivot) {
-			console.log("Element: " + rightList[i] + " is < " + pivot
+	// Iterating through elements in the array
+	for (i = 0; i < list.length; i++) {
+		console.log("list[i]: " + list[i] + " pivot " + pivot);
+		if (list[i] < pivot) {
+			console.log("Element: " + list[i] + " is < " + pivot
 					+ ". Swapping.");
-			swap(rightList[i], leftList, rightList);
+			swap(index, list);
+			index++;
 		}
 	}
 	// Swap the pivot with first item of the right list
-	swap(pivot, leftList, rightList);
-	quicksortPartition(leftList, rightList);
+	swap(index, list);
+	quicksortPartition(list);
 }
 
 /**
@@ -53,21 +43,21 @@ function quicksortPartition(leftList, rightList) {
  * quicksort is to add to the left array, and remove the element from the right
  * array.
  */
-function swap(element, leftList, rightList) {
+function swap(index, list) {
 	/*
 	 * Add the element that is less than pivot to the left array. Replace the
 	 * element at the old index with the first element of the right array
 	 */
 	leftList.push(element);
 	// Remove the element from the array
-	var index = rightList.indexOf(element);
+	var index = list.indexOf(element);
 	/*
 	 * Splice: A way to remove a particular element from the array. The "1"
 	 * removes 1 element from the array.
 	 */
-	rightList.splice(index, 1);
+	list.splice(index, 1);
 	console.log("leftList (after swap): " + leftList);
-	console.log("rightList (after swap): " + rightList);
+	console.log("list (after swap): " + list);
 }
 
-quicksortPartition([], [ 10, 2, 5, 4, 3, 8, 7, 1, 9, 6 ]);
+quicksortPartition(0, [ 10, 2, 5, 4, 3, 8, 7, 1, 9, 6 ]);
