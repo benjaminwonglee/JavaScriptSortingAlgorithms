@@ -6,10 +6,19 @@
  * @author BenWL
  * 
  */
-function quicksortPartition(nList) {
-	// if the array is empty or has 1 element, return the array
-	if(nList.length < 2){
-		return nList;
+function quicksortPartition(leftList, rightList) {
+	// The case of the empty array
+	if(rightList.length == 0){
+		return leftList;
+	}
+	/*
+	 * If the right array is empty or has 1 element, add the element to the end
+	 * of the left array, return the sorted array (the left one); it has been
+	 * sorted.
+	 */
+	if(rightList.length == 1){
+		leftList.push(rightList[0]);
+		return leftList;
 	}
 	
 	/*
@@ -18,12 +27,8 @@ function quicksortPartition(nList) {
 	 * consistent. Better if the approx range of the values is known; since one
 	 * can choose another value if the pivot is not 'central' enough.
 	 */
-	var pivot = nList[nList.length - 1];
+	var pivot = rightList[rightList.length - 1];
 	
-	/*
-	 * TODO: This is currently incorrect and will fix later. Sort items to be
-	 * before the pivot value and after the pivot value.
-	 */
 	// For left of pivot
 	var leftList = [];
 	// For right of pivot
@@ -31,14 +36,12 @@ function quicksortPartition(nList) {
 	// Iterating through elements
 	for(int i = 0; i < pivot; i++){
 		if(nList[i] < pivot) {
-			swap(nList[i], leftList, rightList)
+			swap(nList[i], leftList, rightList);
 		}
 	}
-	quicksortPartition(leftList);
-	quicksortPartition(rightList);
-}
-
-function quicksortMerge(nList) {
+	// Swap the pivot with first item of the right list
+	swap(pivot, leftList, rightList);
+	quicksortPartition(leftList, rightList);
 }
 
 /**
@@ -62,4 +65,4 @@ function swap(element, leftList, rightList){
 	
 }
 
-quicksortPartition([10, 2, 5, 4, 3, 8, 7, 1, 9, 6]);
+console.log(quicksortPartition([], [10, 2, 5, 4, 3, 8, 7, 1, 9, 6]));
