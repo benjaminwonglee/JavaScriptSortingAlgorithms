@@ -1,18 +1,24 @@
 /**
  * 
  * This is a quicksort algorithm written in Javascript which takes an array of
- * integers and sorts them.
+ * integers and sorts them. The wallIndex should initially be the number of
+ * elements from the left that are known to be sorted, else 0 if not known. The
+ * finalList is a blank list filled out at the end.
  * 
  * @author BenWL
  * 
  */
-function quicksortPartition(index, list) {
+function quicksortPartition(wallIndex, list, finalList) {
 	console.log("list (init): " + list);
 
 	// The case of the empty array
-	if (list.length < 2) {
-		console.log("Final: " + list);
+	if (list.length == 0) {
 		return list;
+	}
+	if (list.length == 1) {
+		finalList.push(list[0]);
+		console.log("Current final list: " + finalList);
+		return finalList;
 	}
 
 	/*
@@ -26,38 +32,47 @@ function quicksortPartition(index, list) {
 	// Iterating through elements in the array
 	for (i = 0; i < list.length; i++) {
 		console.log("list[i]: " + list[i] + " pivot " + pivot);
-		if (list[i] < pivot) {
-			console.log("Element: " + list[i] + " is < " + pivot
-					+ ". Swapping.");
-			swap(index, list);
-			index++;
+		/*
+		 * Swap all elements <= the pivot with the element at the current wall
+		 * index. If that happens to be the same element, don't do anything.
+		 * Shift the wall across by 1.
+		 */
+		if (list[i] <= pivot) {
+			console.log("Element: " + list[i] + " is <= " + pivot
+					+ ".");
+			swap(wallIndex, i, list);
+			wallIndex++;
 		}
 	}
-	// Swap the pivot with first item of the right list
-	swap(index, list);
-	quicksortPartition(list);
+	var leftList = [];
+	var rightList = [];
+	// Elements < the pivot in the left array.
+	for (i = 0; i < wallIndex - 1; i++) {
+		leftList.push(list[i]);
+	}
+	// Elements >= the pivot in the right array.
+	for (i = wallIndex - 1; i < list.length; i++) {
+		rightList.push(list[i]);
+	}
+	// Call on both left and right sides until final list is complete
+	quicksortPartition(0, leftList, finalList);
+	quicksortPartition(0, rightList, finalList);
 }
 
 /**
- * Swap when the item is less than the pivot value. Equivalent to swapping in
- * quicksort is to add to the left array, and remove the element from the right
- * array.
+ * Swap when the item is less than the pivot value. Swap the wall index element
+ * with the current element that is <= the pivot.
  */
-function swap(index, list) {
-	/*
-	 * Add the element that is less than pivot to the left array. Replace the
-	 * element at the old index with the first element of the right array
-	 */
-	leftList.push(element);
-	// Remove the element from the array
-	var index = list.indexOf(element);
-	/*
-	 * Splice: A way to remove a particular element from the array. The "1"
-	 * removes 1 element from the array.
-	 */
-	list.splice(index, 1);
-	console.log("leftList (after swap): " + leftList);
+function swap(wallIndex, elemIndex, list) {
+	if (wallIndex == elemIndex) {
+		console.log("Element is at wall index.");
+		return;
+	}
+	console.log("Swapping with wall index element.");
+	var temp = list[elemIndex];
+	list[elemIndex] = list[wallIndex];
+	list[wallIndex] = temp;
 	console.log("list (after swap): " + list);
 }
 
-quicksortPartition(0, [ 10, 2, 5, 4, 3, 8, 7, 1, 9, 6 ]);
+quicksortPartition(0, [ 10, 2, 5, 4, 3, 8, 7, 1, 9, 6 ], []);
