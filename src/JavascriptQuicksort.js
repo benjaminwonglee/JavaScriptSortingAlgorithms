@@ -1,9 +1,8 @@
 /**
- * 
  * This is a quicksort algorithm written in Javascript which takes an array of
  * integers and sorts them. The wallIndex should initially be the number of
  * elements from the left that are known to be sorted, else 0 if not known. The
- * finalList is a blank list filled out at the end.
+ * finalList is a blank list filled out as the sorting progresses.
  * 
  * @author BenWL
  * 
@@ -29,17 +28,16 @@ function quicksortPartition(wallIndex, list, finalList) {
 	 */
 	var pivot = list[list.length - 1];
 
-	// Iterating through elements in the array
+	// Iterate through elements in the array
 	for (i = 0; i < list.length; i++) {
 		console.log("list[i]: " + list[i] + " pivot " + pivot);
 		/*
 		 * Swap all elements <= the pivot with the element at the current wall
 		 * index. If that happens to be the same element, don't do anything.
-		 * Shift the wall across by 1.
+		 * Shift the wall across by 1 if swap occurs.
 		 */
 		if (list[i] <= pivot) {
-			console.log("Element: " + list[i] + " is <= " + pivot
-					+ ".");
+			console.log("Element: " + list[i] + " is <= " + pivot + ".");
 			swap(wallIndex, i, list);
 			wallIndex++;
 		}
@@ -61,7 +59,8 @@ function quicksortPartition(wallIndex, list, finalList) {
 
 /**
  * Swap when the item is less than the pivot value. Swap the wall index element
- * with the current element that is <= the pivot.
+ * with the current element that is <= the pivot. If the element is already at
+ * wall index; return.
  */
 function swap(wallIndex, elemIndex, list) {
 	if (wallIndex == elemIndex) {
@@ -75,4 +74,5 @@ function swap(wallIndex, elemIndex, list) {
 	console.log("list (after swap): " + list);
 }
 
+// The initial call
 quicksortPartition(0, [ 10, 2, 5, 4, 3, 8, 7, 1, 9, 6 ], []);
