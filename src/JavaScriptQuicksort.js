@@ -7,7 +7,7 @@
  * @author BenWL
  * 
  */
-function quicksortPartition(wallIndex, list, finalList) {
+function quickSort(wallIndex, list, finalList) {
 	console.log("list (init): " + list);
 
 	// The case of the empty array
