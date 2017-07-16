@@ -14,21 +14,24 @@ function mergeSort(list) {
 	if (list.length > 1) {
 		console.log("listA: " + listA);
 		console.log("listB: " + listB);
-		console.log("first");
 		mergeSort(listA);
-		console.log("second");
+		console.log("listA: point 1: " + listA);
 		mergeSort(listB);
-		console.log("third");
+		console.log("listB: point 1: " + listB);
 		merge(listA, listB);
 	}
 }
 
 function merge(listA, listB) {
+	console.log("listA[0]: point 2: " + listA[0]);
+	console.log("listA[1]: point 2: " + listA[1]);
 	comparison = compare(listA[0], listA[1]);
+	console.log(comparison);
 	if (comparison == 1) {
 		swap(listA);
 	}
 	comparison = compare(listB[0], listB[1]);
+	console.log(comparison);
 	if (comparison == 1) {
 		swap(listB);
 	}
