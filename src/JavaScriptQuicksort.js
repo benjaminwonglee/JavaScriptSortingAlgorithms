@@ -53,8 +53,8 @@ function quickSort(wallIndex, list, finalList) {
 		rightList.push(list[i]);
 	}
 	// Call on both left and right sides until final list is complete
-	quicksortPartition(0, leftList, finalList);
-	quicksortPartition(0, rightList, finalList);
+	quickSort(0, leftList, finalList);
+	quickSort(0, rightList, finalList);
 }
 
 /**
@@ -75,11 +75,11 @@ function swap(wallIndex, elemIndex, list) {
 }
 
 // The initial call
-quicksortPartition(0, [ 10, 2, 5, 4, 3, 8, 7, 1, 9, 6 ], []);
+quickSort(0, [ 10, 2, 5, 4, 3, 8, 7, 1, 9, 6 ], []);
 console.log("_________________________________");
-quicksortPartition(0, [ 102, 112, 145, 34, 23, 78, 137, 1111, 309, 226, 138 ], []);
+quickSort(0, [ 102, 112, 145, 34, 23, 78, 137, 1111, 309, 226, 138 ], []);
 console.log("_________________________________");
-quicksortPartition(0, [ 10, 10, 9, 9, 1, 2, 1, 2, 3, 3, 4, 10], []);
+quickSort(0, [ 10, 10, 9, 9, 1, 2, 1, 2, 3, 3, 4, 10], []);
 console.log("_________________________________");
-quicksortPartition(0, [ -101, -10, 9, 100, 1000, -2000, -1, -2, 3, 3, 401], []);
+quickSort(0, [ -101, -10, 9, 100, 1000, -2000, -1, -2, 3, 3, 401], []);
 console.log("_________________________________");
