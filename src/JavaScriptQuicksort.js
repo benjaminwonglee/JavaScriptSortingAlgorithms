@@ -17,6 +17,9 @@ function quickSort(wallIndex, list, finalList) {
 	if (list.length == 1) {
 		finalList.push(list[0]);
 		console.log("Current final list: " + finalList);
+		get finalist() {
+			return finalList;
+		}
 		return finalList;
 	}
 
@@ -75,6 +78,7 @@ function swap(wallIndex, elemIndex, list) {
 }
 
 // The initial call
+
 quickSort(0, [ 10, 2, 5, 4, 3, 8, 7, 1, 9, 6 ], []);
 console.log("_________________________________");
 quickSort(0, [ 102, 112, 145, 34, 23, 78, 137, 1111, 309, 226, 138 ], []);
