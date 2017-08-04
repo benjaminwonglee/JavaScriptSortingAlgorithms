@@ -7,9 +7,10 @@
  * @author BenWL
  * 
  */
-function quickSort(wallIndex, list, finalList) {
-	//console.log("list (init): " + list);
-
+function quickSort(wallIndex, list, finalList, verbose) {
+	if(verbose){
+		console.log("list (init): " + list);
+	}
 	// The case of the empty array
 	if (list.length == 0) {
 		return list;
@@ -21,8 +22,9 @@ function quickSort(wallIndex, list, finalList) {
 				return finalList;
 			}	
 		};
-		//console.log("Current final list: " + finalList);
-		
+		if(verbose){
+			console.log("Current final list: " + finalList);
+		}
 		return finalList;
 	}
 
@@ -36,15 +38,19 @@ function quickSort(wallIndex, list, finalList) {
 
 	// Iterate through elements in the array
 	for (i = 0; i < list.length; i++) {
-		//console.log("list[i]: " + list[i] + " pivot " + pivot);
+		if(verbose){
+			 console.log("list[i]: " + list[i] + " pivot " + pivot);
+		}
 		/*
 		 * Swap all elements <= the pivot with the element at the current wall
 		 * index. If that happens to be the same element, don't do anything.
 		 * Shift the wall across by 1 if swap occurs.
 		 */
 		if (list[i] <= pivot) {
-			//console.log("Element: " + list[i] + " is <= " + pivot + ".");
-			swap(wallIndex, i, list);
+			if(verbose){
+				console.log("Element: " + list[i] + " is <= " + pivot + ".");
+			}
+			swap(wallIndex, i, list, verbose);
 			wallIndex++;
 		}
 	}
@@ -68,26 +74,41 @@ function quickSort(wallIndex, list, finalList) {
  * with the current element that is <= the pivot. If the element is already at
  * wall index; return.
  */
-function swap(wallIndex, elemIndex, list) {
+function swap(wallIndex, elemIndex, list, verbose) {
 	if (wallIndex == elemIndex) {
-		//console.log("Element is at wall index.");
+		if(verbose){
+			console.log("Element is at wall index.");
+		}
 		return;
 	}
-	//console.log("Swapping with wall index element.");
+	if(verbose){
+		 console.log("Swapping with wall index element.");
+	}
 	var temp = list[elemIndex];
 	list[elemIndex] = list[wallIndex];
 	list[wallIndex] = temp;
-	//console.log("list (after swap): " + list);
+	if(verbose){ 
+		console.log("list (after swap): " + list);
+	}
 }
 
 var finalist;
-// The initial call
-quickSort(0, [ 10, 2, 5, 4, 3, 8, 7, 1, 9, 6 ], []);
-console.log(finalist.final);
-console.log("_________________________________");
-//quickSort(0, [ 102, 112, 145, 34, 23, 78, 137, 1111, 309, 226, 138 ], []);
-//console.log("_________________________________");
-//quickSort(0, [ 10, 10, 9, 9, 1, 2, 1, 2, 3, 3, 4, 10], []);
-//console.log("_________________________________");
-//quickSort(0, [ -101, -10, 9, 100, 1000, -2000, -1, -2, 3, 3, 401], []);
-//console.log("_________________________________");
+var verbose;
+
+if(process.argv.length<3){
+	// Do default
+	verbose = true;
+	// The initial call
+	quickSort(0, [ 10, 2, 5, 4, 3, 8, 7, 1, 9, 6 ], [], verbose); 
+	console.log("_________________________________");
+	quickSort(0, [ 102, 112, 145, 34, 23, 78, 137, 1111, 309, 226, 138 ], [], verbose);
+	console.log("_________________________________");
+	quickSort(0, [ 10, 10, 9, 9, 1, 2, 1, 2, 3, 3, 4, 10], [], verbose);
+	console.log("_________________________________");
+	quickSort(0, [ -101, -10, 9, 100, 1000, -2000, -1, -2, 3, 3, 401], [], verbose);
+	console.log("_________________________________");
+}else{
+	quickSort(0, process.argv[2], [], process.argv[3]);
+	console.log(finalist.final);
+	console.log("_________________________________");
+}
