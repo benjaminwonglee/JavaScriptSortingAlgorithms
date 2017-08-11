@@ -12,10 +12,10 @@ function quickSort(wallIndex, list, finalList, verbose) {
 		console.log("list (initial): " + list);
 	}
 	// The case of the empty array
-	if (list.length == 0) {
+	if (list.length === 0) {
 		return list;
 	}
-	if (list.length == 1) {
+	if (list.length === 1) {
 		finalList.push(list[0]);
 		finalist = {
 			get final() {

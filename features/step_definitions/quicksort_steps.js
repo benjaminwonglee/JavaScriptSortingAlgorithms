@@ -1,12 +1,16 @@
-// stepdefinitions.js
-const expect = require('chai').expect;
-
-module.exports = function () {
-  this.Given(/^I have put in "([^"]*)"$/, ("[10, 5, 7, 9]") => {
+Cucumber.defineSupportCode(function(context) {
+  var setWorldConstructor = context.setWorldConstructor;
+  var Given = context.Given
+  var When = context.When
+  var Then = context.Then
+  
+  Given(/^I have put in "([^"]*)"$/, (list) => {
     quicksort(0, list, []);
   });
 
-  this.Then(/^I expect the list to be "([^"]*)"$/, (sorted) => {
-    console.log(finalist.final);
+  Then(/^I expect the list to be "([^"]*)"$/, (sorted) => {
+    if(sorted != finalist.final){
+		  throw new Error('Variable should contain ' + finalist.final + ' but it contains ' + sorted + '.');
+	}
   });
-}
+});
