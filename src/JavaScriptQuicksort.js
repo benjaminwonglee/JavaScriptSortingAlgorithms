@@ -9,7 +9,7 @@
  */
 function quickSort(wallIndex, list, finalList, verbose) {
 	if(verbose){
-		console.log("list (init): " + list);
+		console.log("list (initial): " + list);
 	}
 	// The case of the empty array
 	if (list.length == 0) {
@@ -107,8 +107,14 @@ if(process.argv.length<3){
 	console.log("_________________________________");
 	quickSort(0, [ -101, -10, 9, 100, 1000, -2000, -1, -2, 3, 3, 401], [], verbose);
 	console.log("_________________________________");
+	console.log('Usage: 2 arguments: 1st argument is an unsorted array in the format of \"[5,10,2,3,5]\" or similar');
+	console.log('2nd argument is to type any character if verbose output is desired');
+	console.log('Used default examples');
+	
 }else{
-	quickSort(0, process.argv[2], [], process.argv[3]);
+	var array = JSON.parse(process.argv[2]);
+	var verbose = process.argv[3];
+	quickSort(0, array, [], verbose);
 	console.log(finalist.final);
 	console.log("_________________________________");
 }
