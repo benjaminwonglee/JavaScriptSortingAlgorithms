@@ -29,10 +29,10 @@ function quickSort(wallIndex, list, finalList, verbose) {
 	}
 
 	/*
-	 * Choose a pivot value; in this case the last value is chosen but any value
-	 * can be chosen; but really any value can be chosen as long as it is
-	 * consistent. Better if the approx range of the values is known; since one
-	 * can choose another value if the pivot is not 'central' enough.
+	 * Choose a pivot value; in this case the last value is chosen; but really any 
+	 * value can be chosen as long as it is a consistent choice. Better if the 
+	 * approx range of the values is known; can choose another value if the 
+	 * pivot is not 'central' enough.
 	 */
 	var pivot = list[list.length - 1];
 
